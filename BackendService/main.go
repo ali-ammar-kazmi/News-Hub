@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	handler "github.com/ali-ammar-kazmi/backend-service/handler"
+	"github.com/ali-ammar-kazmi/backend-service/handler"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
@@ -18,13 +18,14 @@ func main() {
 	router := mux.NewRouter()
 
 	// Register your API handlers with the CORS middleware
-	headerOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})
+	headerOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type"})
 	originOk := handlers.AllowedOrigins([]string{"*"})
-	methodsOk := handlers.AllowedMethods([]string{"GET", "PUT", "OPTIONS"})
+	methodsOk := handlers.AllowedMethods([]string{"GET"})
 
 	// API request handler
 	router.HandleFunc("/weather", handler.GetWeather).Methods("GET")
 	router.HandleFunc("/news", handler.GetNews).Methods("GET")
+	router.HandleFunc("/image", handler.GetImage).Methods("GET")
 
 	fmt.Println("Server listening at port - http://localhost:8080")
 

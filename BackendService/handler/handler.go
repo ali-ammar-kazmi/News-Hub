@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	service "github.com/ali-ammar-kazmi/backend-service/service"
+	"github.com/ali-ammar-kazmi/backend-service/service"
 )
 
 func GetWeather(w http.ResponseWriter, r *http.Request) {
@@ -32,11 +32,29 @@ func GetNews(w http.ResponseWriter, r *http.Request) {
 	pageSize := r.FormValue("pageSize")
 	if category == "" {
 		category = "general"
+		page = "1"
+		pageSize = "6"
 	}
 
 	news := service.GetNewsData(category, page, pageSize)
 
 	data, _ := json.Marshal(news)
+
+	w.Write(data)
+}
+
+func GetImage(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Content-Type", "application/json")
+
+	title := r.FormValue("title")
+	if title == "" {
+		title = "landscape"
+	}
+
+	image := service.GetImageData(title)
+
+	data, _ := json.Marshal(image)
 
 	w.Write(data)
 }

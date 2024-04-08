@@ -32,3 +32,16 @@ type NewsRes struct {
 		PublishedAt string `json:"publishedAt"`
 	} `json:"articles"`
 }
+
+type ImageRes struct {
+	Photos []struct {
+		Id  uint   `json:"id"`
+		URL string `json:"url"`
+		Src struct {
+			Original string `json:"original"`
+			Medium   string `json:"medium"`
+			Portrait string `json:"portrait"`
+		} `json:"src"`
+		Alt string `json:"alt"`
+	} `json:"photos"`
+}
