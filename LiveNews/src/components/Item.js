@@ -1,12 +1,19 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
+import { getImage } from "../utils/imageApi";
 
-export default class Item extends Component {
-  render() {
-    const { title, description, url, imgUrl, author, date, source } =
-    this.props;
+const Item = ({title, description, url, imgUrl, author, date, source , category})=> {
+  const [img, setImg] = useState(imgUrl);
+
+  const getImg = async ()=>{
+        if (img === ""){
+        const response = await getImage(category);
+        setImg(response?.data?.photos?.[0]?.src?.medium)
+      }
+  }
+  getImg();
     return (
       <div className="card">
-        <img src={imgUrl} className="card-img-top" alt="..." />
+        <img src={img} className="card-img-top" alt="..." />
         <div className="card-body">
           <h5 className="card-title">
             {title} - 
@@ -32,4 +39,5 @@ export default class Item extends Component {
       </div>
     );
   }
-}
+
+export default Item;

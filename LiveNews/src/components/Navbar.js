@@ -15,13 +15,13 @@ export default class Navbar extends Component {
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <Link className="nav-link active" aria-current="page" to="/Home">
+                  <Link className="nav-link active" aria-current="page" to="/">
                     {this.props.home}
                   </Link>
                 </li>
                 {categories.map((category) => (
                   <li className="nav-item" key={category}>
-                    <Link className="nav-link" to={`/${category}`}>
+                    <Link className="nav-link" to={category === "Home"? "/":`/${category}`}>
                       {category}
                     </Link>
                   </li>

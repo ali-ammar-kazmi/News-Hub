@@ -1,5 +1,4 @@
 import { React, useState, useEffect, Fragment } from "react";
-import { img } from "./constants";
 import Item from "./Item";
 import Spinner from "./Spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -54,13 +53,14 @@ const News = ({ category }) => {
                 {articles?.map((element, index) => (
                   <div className="col-4" key={index}>
                     <Item
-                      title={element.title || ""}
-                      imgUrl={element.UrlToImage || img}
-                      description={element.description || "No Content"}
-                      url={element.url || ""}
-                      author={element.author || "Unknown"}
-                      date={element.publishedAt || "00:00:00"}
-                      source={element.source?.Name || ""}
+                      title={element?.title || ""}
+                      imgUrl={element?.UrlToImage}
+                      description={element?.description || "No Content"}
+                      url={element?.url || ""}
+                      author={element?.author || "Unknown"}
+                      date={element?.publishedAt || "00:00:00"}
+                      source={element?.source?.Name || ""}
+                      category={category}
                     />
                   </div>
                 ))}
@@ -87,17 +87,16 @@ const News = ({ category }) => {
                         - {resp?.sys?.country}
                       </span>
                     </h5>
-                    <p className="card-text">{resp?.main?.temp}</p>
+                    <p className="card-text">{Math.round(resp?.main?.temp - 273.15)} Celcius</p>
                     <p className="card-text">
-                      latestBy - {resp.Date.year}/{resp.Date.day}/
-                      {resp.Date.month}
+                      latestBy - {resp.Date.year}/{resp.Date.month}/{resp.Date.day}
                     </p>
                     <input
                       className="city-ip"
                       type="text"
                       placeholder="Enter your city name - lucknow"
                       onChange={(e) => setCity(e.target.value)}
-                    />{" "}
+                    />&nbsp;&nbsp;&nbsp;
                     <input
                       type="button"
                       value="Submit"

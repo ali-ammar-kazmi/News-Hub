@@ -12,7 +12,7 @@ export default class App extends Component {
         <Route
           key={category}
           exact
-          path={`/${category}`}
+          path={category === "Home" ? '/':`/${category}`}
           element={
             category === "Home" ? (
               <Home />
